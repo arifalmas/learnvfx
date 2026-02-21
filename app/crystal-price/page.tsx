@@ -2,7 +2,7 @@ import CrystalCard from "../components/crystal-card/CrystalCard"
 
 const PricingPage = () => {
   return (
-    <div className="min-h-screen bg-black text-white py-16">
+    <div className="min-h-screen bg-black text-white py-32">
       <div className="lg:max-w-7xl mx-auto px-5">
 
         {/* ===HEADER=== */}

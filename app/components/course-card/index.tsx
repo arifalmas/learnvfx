@@ -6,8 +6,8 @@ import thumb from "../../../public/finalsfx.png";
 
 export default function CourseSection() {
   return (
-    <section className="border-t border-white/10 bg-[#151518] py-20 mb-20 rounded-lg">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="border-t border-white/10 bg-[#151518] py-20 lg:mb-20 rounded-lg px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto">
 
         {/* ===== Section Title ===== */}
         <div className="text-center mb-14">

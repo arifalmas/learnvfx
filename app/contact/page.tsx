@@ -11,10 +11,10 @@ import {
 const ContactPage =() =>{
   return (
 
-    <section className="max-w-7xl min-h-screen mx-auto grid lg:grid-cols-2 gap-24 px-6 pb-5 lg:py-24">
+    <section className="max-w-7xl min-h-screen mx-auto lg:flex justify-between items-center md:space-x-7 px-6 py-14 lg:py-36">
 
       {/* Left Side — Big Statement */}
-      <div className="space-y-5 pt-10">
+      <div className="space-y-5 pt-10 md:w-1/2">
         <span className="text-xs tracking-[0.4em] uppercase text-indigo-400">
           Get In Touch
         </span>
@@ -69,7 +69,7 @@ const ContactPage =() =>{
 
 
       {/* Right Side — Premium Floating Form */}
-      <div className="h-fit bg-white/10 backdrop-blur-sm border border-white/30 p-10 rounded-3xl -mt-10">
+      <div className="md:w-2/3 h-fit bg-white/10 backdrop-blur-sm border border-white/30 p-10 rounded-3xl mt-5 md:-mt-10">
 
         <h2 className="text-3xl font-semibold tracking-tight mb-12">
           Start the Conversation

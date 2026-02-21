@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 const LoginRegisterPage = () => {
 
   return (
-    <div className="max-w-md mx-auto py-10">
+    <div className="max-w-xl  min-h-screen flex justify-center items-center mx-auto">
 
       <Card className="bg-[#1d1d1d] text-white border-[#262626]">
         {/* ======= TAB FOR LOGIN REGISTER======= */}
