@@ -6,7 +6,7 @@ import { SignupForm } from "@/components/authentication/signup-form";
 const LoginRegisterPage = () => {
 
   return (
-    <div className="max-w-xl  min-h-screen flex justify-center items-center mx-auto">
+    <div className="max-w-xl  min-h-screen flex justify-center items-center mx-auto py-32">
 
       <Card className="bg-[#1d1d1d] text-white border-[#262626]">
         {/* ======= TAB FOR LOGIN REGISTER======= */}
