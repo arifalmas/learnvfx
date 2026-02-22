@@ -1,8 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-import { courses } from "../../courses/data";
-import thumb from "../../../public/finalsfx.png";
+import { courses } from "@/data/data";
 
 export default function CourseSection() {
   return (
@@ -26,7 +24,7 @@ export default function CourseSection() {
 
                 {/* Top */}
                 <div className="flex gap-4 mb-4">
-                  <Image src={thumb} alt={course.title} width={64} height={64}
+                  <Image src='/finalsfx.png' alt={course.title} width={64} height={64}
                     className="rounded-xl object-cover" />
 
                   <div>

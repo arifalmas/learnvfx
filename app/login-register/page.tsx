@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoginForm } from "../components/authentication/login-form";
-import { SignupForm } from "../components/authentication/signup-form";
 import { Card } from "@/components/ui/card";
+import { LoginForm } from "@/components/authentication/login-form";
+import { SignupForm } from "@/components/authentication/signup-form";
 
 const LoginRegisterPage = () => {
 

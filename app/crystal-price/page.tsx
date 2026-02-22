@@ -1,4 +1,4 @@
-import CrystalCard from "../components/crystal-card/CrystalCard"
+import PricingCard from "@/components/crystal-card/CrystalCard";
 
 const PricingPage = () => {
   return (
@@ -16,11 +16,11 @@ const PricingPage = () => {
 
         {/* ==== PRICING CARD ===== */}
         <div className="grid gap-8 grid-cols-1 md:grid-cols-3 justify-center">
-          <CrystalCard crystals={1} price={100} discount={0} color="to-blue-500/20" />
+          <PricingCard crystals={1} price={100} discount={0} color="to-blue-500/20" />
 
-          <CrystalCard crystals={10} price={900} discount={100} highlight={true} color="to-pink-500/20" />
+          <PricingCard crystals={10} price={900} discount={100} highlight={true} color="to-pink-500/20" />
 
-          <CrystalCard crystals={20} price={1700} discount={300} color="to-green-500/20" />
+          <PricingCard crystals={20} price={1700} discount={300} color="to-green-500/20" />
         </div>
 
         {/* ====NOTES==== */}
