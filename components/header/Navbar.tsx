@@ -1,20 +1,38 @@
 "use client";
 
+import { doLogout } from "@/actions/auth-actions";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuGroup,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuShortcut,
+	DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import useProfile from "@/hooks/useProfile";
+import { useQueryClient } from "@tanstack/react-query";
+import { Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, User, X } from "lucide-react";
+const menuItems = [
+	{ name: "Home", link: "/" },
+	{ name: "Courses", link: "/courses" },
+	{ name: "Contact", link: "/contact" },
+	{ name: "Pricing", link: "/crystal-price" },
+];
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
+	const { data: profile } = useProfile();
+	const user = profile?.data;
 
-	const user = false;
-
-	const menuItems = [
-		{ name: "Home", link: "/" },
-		{ name: "Courses", link: "/courses" },
-		{ name: "Contact", link: "/contact" },
-		{ name: "Pricing", link: "/crystal-price" },
-	];
+	const queryClient = useQueryClient();
+	const handleLogout = async () => {
+		queryClient.clear();
+		await doLogout();
+	};
 
 	return (
 		<header className="fixed md:top-2 left-0 right-0 z-50 transition-all duration-300">
@@ -41,16 +59,42 @@ export default function Navbar() {
 							))}
 
 							{user ? (
-								<div className="flex items-center space-x-3">
-									<span>💎 25</span>
-									<User
-										size={30}
-										className="text-white/80 hover:text-white transition cursor-pointer bg-gray-700 rounded-full p-1"
-									/>
-								</div>
+								<DropdownMenu>
+									<DropdownMenuTrigger asChild>
+										<button className="flex items-center gap-2">
+											<span>💎 25</span>
+											<User
+												size={30}
+												className="text-white/80 hover:text-white transition cursor-pointer bg-gray-700 rounded-full p-1"
+											/>
+										</button>
+									</DropdownMenuTrigger>
+									<DropdownMenuContent className="w-40" align="end">
+										<DropdownMenuGroup>
+											<DropdownMenuLabel>
+												My Account
+											</DropdownMenuLabel>
+											<DropdownMenuItem>
+												Profile
+												<DropdownMenuShortcut>
+													⇧⌘P
+												</DropdownMenuShortcut>
+											</DropdownMenuItem>
+										</DropdownMenuGroup>
+										<DropdownMenuSeparator />
+										<DropdownMenuGroup>
+											<DropdownMenuItem onClick={handleLogout}>
+												Log out
+												<DropdownMenuShortcut>
+													⇧⌘Q
+												</DropdownMenuShortcut>
+											</DropdownMenuItem>
+										</DropdownMenuGroup>
+									</DropdownMenuContent>
+								</DropdownMenu>
 							) : (
 								<Link
-									href="/login-register"
+									href="/auth/login"
 									className="px-3 py-2 rounded-full bg-white text-black font-semibold">
 									Login/Register
 								</Link>

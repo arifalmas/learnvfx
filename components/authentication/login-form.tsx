@@ -1,5 +1,5 @@
 "use client";
-import { doSignin } from "@/app/actions/auth-actions";
+import { doSignin } from "@/actions/auth-actions";
 import { Button } from "@/components/ui/button";
 import {
 	CardContent,
@@ -16,13 +16,22 @@ import {
 import { Input } from "@/components/ui/input";
 import Form from "next/form";
 import Link from "next/link";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function LoginForm() {
+	const queryClient = useQueryClient();
 	const [state, formAction, isPending] = useActionState(doSignin, {
 		success: false,
 		user: null,
 	});
+
+	useEffect(() => {
+		if (state.success && state.user) {
+			// Manually update the 'profile' cache with the data from login response
+			queryClient.setQueryData(["profile"], state.user);
+		}
+	}, [state.success, state.user, queryClient]);
 	return (
 		<>
 			<CardHeader className="text-center">

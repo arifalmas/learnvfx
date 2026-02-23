@@ -96,3 +96,9 @@ export async function doRegister(
 
 	return { success: true, user: data };
 }
+
+export async function doLogout() {
+	const response = await apiClient.post("/auth/logout");
+	await syncCookies(response);
+	redirect("/auth/login");
+}

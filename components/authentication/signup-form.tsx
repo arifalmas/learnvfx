@@ -1,5 +1,5 @@
 "use client";
-import { doRegister } from "@/app/actions/auth-actions";
+import { doRegister } from "@/actions/auth-actions";
 import { Button } from "@/components/ui/button";
 import {
 	CardContent,
