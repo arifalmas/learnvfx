@@ -1,9 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LoginForm } from "../../components/authentication/login-form";
-import { SignupForm } from "../../components/authentication/signup-form";
 import { Card } from "@/components/ui/card";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { LoginForm } from "@/components/authentication/login-form";
+import { SignupForm } from "@/components/authentication/signup-form";
 
 const LoginRegisterPage = async ({
 	params,
@@ -17,7 +17,7 @@ const LoginRegisterPage = async ({
 	}
 
 	return (
-		<div className="max-w-md mx-auto py-32 min-h-[95svh]">
+		<div className="max-w-md mx-auto pt-44 pb-20 min-h-[95svh]">
 			<Card className="bg-[#1d1d1d] text-white border-[#262626]">
 				{/* ======= TAB FOR LOGIN REGISTER======= */}
 				<Tabs defaultValue={slug} className="w-full mt-2 ">

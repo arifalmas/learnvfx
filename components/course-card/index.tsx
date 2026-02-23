@@ -1,13 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-
-import { courses } from "../../courses/data";
-import thumb from "../../../public/finalsfx.png";
+import { courses } from "@/data/data";
 
 export default function CourseSection() {
   return (
-    <section className="border-t border-white/10 bg-[#151518] py-20 mb-20 rounded-lg">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="border-t border-white/10 bg-[#151518] py-20 lg:mb-20 rounded-lg px-6 lg:px-12">
+      <div className="max-w-7xl mx-auto">
 
         {/* ===== Section Title ===== */}
         <div className="text-center mb-14">
@@ -26,7 +24,7 @@ export default function CourseSection() {
 
                 {/* Top */}
                 <div className="flex gap-4 mb-4">
-                  <Image src={thumb} alt={course.title} width={64} height={64}
+                  <Image src='/finalsfx.png' alt={course.title} width={64} height={64}
                     className="rounded-xl object-cover" />
 
                   <div>

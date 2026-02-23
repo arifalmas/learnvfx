@@ -1,9 +1,10 @@
-import CourseSection from "./components/course-card";
-import Header from "./components/header/index";
+import CourseSection from "@/components/course-card";
+import HeroSection from "@/components/header";
+
 export default function Home() {
   return (
-    <div className="px-6 lg:px-12">
-      <Header />
+    <div>
+      <HeroSection />
       <CourseSection />
     </div>
   );
