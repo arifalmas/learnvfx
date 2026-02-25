@@ -17,6 +17,7 @@ import { Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { useRouter } from "next/navigation";
 const menuItems = [
 	{ name: "Home", link: "/" },
 	{ name: "Courses", link: "/courses" },
@@ -28,11 +29,13 @@ export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const { data: profile, isPending } = useProfile();
 	const user = profile?.data;
+	const router = useRouter();
 
 	const queryClient = useQueryClient();
 	const handleLogout = async () => {
-		queryClient.clear();
 		await doLogout();
+		queryClient.removeQueries({ queryKey: ["profile"] });
+		router.replace("/auth/login");
 	};
 
 	return (

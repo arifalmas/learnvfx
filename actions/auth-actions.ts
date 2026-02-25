@@ -82,6 +82,4 @@ export async function doLogout() {
 		cookieStore.delete("access_token");
 		cookieStore.delete("refresh_token");
 	}
-
-	redirect("/auth/login");
 }
