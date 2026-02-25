@@ -94,11 +94,7 @@ apiClient.interceptors.response.use(
 	(response) => response,
 	(error) => {
 		if (error.response) {
-			console.error(
-				"[API Error]",
-				error.response.status,
-				error.response.data,
-			);
+			console.log("[API Error]", error.response.status, error.response.data);
 		}
 		return Promise.reject(error);
 	},

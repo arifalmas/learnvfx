@@ -14,14 +14,37 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import Form from "next/form";
-import { useActionState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 export function SignupForm() {
-	const [state, formAction, isPending] = useActionState(doRegister, {
+	const [isPending, startTransition] = useTransition();
+	const [state, setState] = useState<{
+		success: boolean;
+		error?: { message: string };
+	}>({
 		success: false,
-		user: null,
 	});
+	const queryClient = useQueryClient();
+	const router = useRouter();
+
+	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+		startTransition(async () => {
+			const result = await doRegister(formData);
+			if (result.success) {
+				queryClient.setQueryData(["profile"], result.user);
+				router.replace("/");
+			} else {
+				setState({
+					success: false,
+					error: result.error,
+				});
+			}
+		});
+	};
 	return (
 		<>
 			<CardHeader className="text-center">
@@ -31,7 +54,7 @@ export function SignupForm() {
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<Form action={formAction}>
+				<form onSubmit={handleSubmit}>
 					<FieldGroup>
 						<Field>
 							<FieldLabel htmlFor="name">Full Name</FieldLabel>
@@ -82,7 +105,7 @@ export function SignupForm() {
 							</Button>
 						</Field>
 					</FieldGroup>
-				</Form>
+				</form>
 			</CardContent>
 		</>
 	);

@@ -14,24 +14,39 @@ import {
 	FieldLabel,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import Form from "next/form";
-import Link from "next/link";
-import { useActionState, useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 export function LoginForm() {
-	const queryClient = useQueryClient();
-	const [state, formAction, isPending] = useActionState(doSignin, {
+	const [isPending, startTransition] = useTransition();
+	const [state, setState] = useState<{
+		success: boolean;
+		error?: { message: string };
+	}>({
 		success: false,
-		user: null,
 	});
+	const queryClient = useQueryClient();
+	const router = useRouter();
 
-	useEffect(() => {
-		if (state.success && state.user) {
-			// Manually update the 'profile' cache with the data from login response
-			queryClient.setQueryData(["profile"], state.user);
-		}
-	}, [state.success, state.user, queryClient]);
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+		const formData = new FormData(event.currentTarget);
+		startTransition(async () => {
+			const result = await doSignin(formData);
+			if (result.success) {
+				queryClient.setQueryData(["profile"], result.user);
+				router.replace("/");
+			} else {
+				setState({
+					success: false,
+					error: result.error,
+				});
+			}
+		});
+	};
+
 	return (
 		<>
 			<CardHeader className="text-center">
@@ -41,7 +56,7 @@ export function LoginForm() {
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<Form action={formAction}>
+				<form onSubmit={handleSubmit}>
 					<FieldGroup>
 						<Field>
 							<FieldLabel htmlFor="email">Email</FieldLabel>
@@ -83,7 +98,7 @@ export function LoginForm() {
 							</Button>
 						</Field>
 					</FieldGroup>
-				</Form>
+				</form>
 			</CardContent>
 		</>
 	);
