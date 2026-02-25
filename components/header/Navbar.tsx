@@ -16,6 +16,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import { Skeleton } from "../ui/skeleton";
 const menuItems = [
 	{ name: "Home", link: "/" },
 	{ name: "Courses", link: "/courses" },
@@ -25,7 +26,7 @@ const menuItems = [
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
-	const { data: profile } = useProfile();
+	const { data: profile, isPending } = useProfile();
 	const user = profile?.data;
 
 	const queryClient = useQueryClient();
@@ -58,13 +59,18 @@ export default function Navbar() {
 								</Link>
 							))}
 
-							{user ? (
+							{isPending ? (
+								<div className="flex items-center gap-2">
+									<Skeleton className="h-5 w-10 bg-gray-700 rounded" />
+									<Skeleton className="aspect-square w-9 rounded-full bg-gray-700" />
+								</div>
+							) : user ? (
 								<DropdownMenu>
 									<DropdownMenuTrigger asChild>
 										<button className="flex items-center gap-2">
 											<span>💎 25</span>
 											<User
-												size={30}
+												size={36}
 												className="text-white/80 hover:text-white transition cursor-pointer bg-gray-700 rounded-full p-1"
 											/>
 										</button>

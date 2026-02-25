@@ -36,7 +36,7 @@ export function SignupForm() {
 			const result = await doRegister(formData);
 			if (result.success) {
 				queryClient.setQueryData(["profile"], result.user);
-				router.replace("/");
+				router.replace("/login");
 			} else {
 				setState({
 					success: false,
