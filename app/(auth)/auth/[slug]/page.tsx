@@ -18,8 +18,8 @@ const LoginRegisterPage = async ({
 
 	return (
 		<div className="px-4">
-			<div className="max-w-md mx-auto pt-20 md:pt-[20vh] min-h-[95svh]">
-				<Card className="bg-[#1d1d1d] text-white border-[#262626]">
+			<div className="max-w-md mx-auto pt-10 md:pt-[10vh] min-h-[95svh]">
+				<Card className="bg-[#1d1d1d] text-white border-gray-500">
 					{/* ======= TAB FOR LOGIN REGISTER======= */}
 					<Tabs defaultValue={slug} className="w-full mt-2 ">
 						{/* ======= TAB LISTS======= */}

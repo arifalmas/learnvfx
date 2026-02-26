@@ -29,9 +29,12 @@ export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const { data: profile, isPending } = useProfile();
 	const user = profile?.data;
+  const crystal = user?.crystal
+
 	const router = useRouter();
 
 	const queryClient = useQueryClient();
+  
 	const handleLogout = async () => {
 		await doLogout();
 		queryClient.removeQueries({ queryKey: ["profile"] });
@@ -71,7 +74,7 @@ export default function Navbar() {
 								<DropdownMenu>
 									<DropdownMenuTrigger asChild>
 										<button className="flex items-center gap-2">
-											<span>💎 25</span>
+											<span>💎 {crystal}</span>
 											<User
 												size={36}
 												className="text-white/80 hover:text-white transition cursor-pointer bg-gray-700 rounded-full p-1"
