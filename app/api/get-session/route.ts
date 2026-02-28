@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { apiServer } from "@/lib/api-client";
+import apiClient from "@/lib/api-client";
 
 export async function GET(request: Request) {
 	const cookieStore = await cookies();
@@ -7,7 +7,7 @@ export async function GET(request: Request) {
 	const refreshToken = cookieStore.get("refresh_token");
 
 	try {
-		const res = await apiServer.get("/users/me", {
+		const res = await apiClient.get("/users/me", {
 			headers: {
 				Authorization: `Bearer ${accessToken?.value}`,
 			},
